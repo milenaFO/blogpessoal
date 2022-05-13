@@ -20,6 +20,7 @@ private UsuarioRepository userRepository;
 @Override
 public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 Optional<Usuario> usuario = userRepository.findByUsuario(userName);
+usuario.orElseThrow(() -> new UsernameNotFoundException(userName + " not found."));
 return usuario.map(UserDetailsImpl::new).get();
 }
 }

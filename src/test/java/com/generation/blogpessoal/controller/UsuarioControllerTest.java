@@ -103,5 +103,25 @@ public class UsuarioControllerTest {
 		assertEquals(usuarioUpdate.getNome(), resposta.getBody().getNome());
 		assertEquals(usuarioUpdate.getUsuario(), resposta.getBody().getUsuario());
 }
-	
+	@Test
+	@Order(4)
+	@DisplayName("Listar todos os Usuários")
+	public void deveMostrarTodosUsuarios() {
+
+		usuarioService.cadastrarUsuario(new Usuario(0L, 
+			"Sabrina Sanches", "sabrina_sanches@email.com.br", 
+			"sabrina123", "https://i.imgur.com/5M2p5Wb.jpg"));
+		
+		usuarioService.cadastrarUsuario(new Usuario(0L, 
+			"Ricardo Marques", "ricardo_marques@email.com.br", 
+			"ricardo123", "https://i.imgur.com/Sk5SjWE.jpg"));
+
+		ResponseEntity<String> resposta = testRestTemplate
+			.withBasicAuth("root", "root")
+			.exchange("/usuarios/all", HttpMethod.GET, null, String.class);
+
+		assertEquals(HttpStatus.OK, resposta.getStatusCode());
+	}
+
+
 }
