@@ -122,6 +122,10 @@ public class UsuarioControllerTest {
 
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
 	}
-
-
+	@Test
+	@Order(5)
+	@DisplayName("Consultar usuário por id")
+	public void deveMostrarFindById() {
+	
+}
 }
